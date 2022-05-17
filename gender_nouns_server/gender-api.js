@@ -339,6 +339,13 @@ class GenderAPI {
   start() {
     app.set("trust proxy", true);
 
+    app.use((req, res, next) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTION");
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+      next();
+    });
+
     app.get("/api/translate", async (req, res) => {
       const parsed = url.parse(req.url, true);
 
